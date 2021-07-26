@@ -1,24 +1,28 @@
 package application;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		//Criar um objeto
-		File file = new File("C:\\in.txt");//instatciare o file para pegar o endereço
-		//o file vai encapsular todas as tarefas do arquivo ex: file.canWrite()
-		Scanner sc = null;//deicxar um valor nulo inicial
+		String path = "c:\\in.txt";
+		FileReader fr = null;//nulo só para dá um valor a variável
+		BufferedReader br = null;
 		
-		//Com o scanner pode ocorrer um exception para abrir o arquivo, logo usamos o try
-		
+		//para ler o arquivo
 		try {
-			sc = new Scanner(file);
-			while(sc.hasNextLine()) { //hasNextLine() serve para testa se há uma linha no arquivo
-				System.out.println(sc.nextLine());
+			fr = new FileReader(path);//instanciou filereader com path
+			br = new BufferedReader(fr);//desse jeito, torna a leitura mais rápida
+			
+			//manda uma linha do arquivo
+			String line = br.readLine();
+			
+			while(line != null) {
+				System.out.println(line);
+				line = br.readLine();
 			}
 		}
 		
@@ -26,13 +30,20 @@ public class Program {
 			System.out.println("Error: " + e.getMessage());
 		}
 		
-		//o finally é para finalizar o program indepedentemente do try!
 		finally {
-			if(sc != null) {
-				sc.close();
+			try {
+				if(br != null) {
+					br.close();
+				}
+				if(fr != null) {
+					fr.close();
+				}
 			}
-			
+			catch(IOException e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 }
