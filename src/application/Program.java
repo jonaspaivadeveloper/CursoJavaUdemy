@@ -6,43 +6,54 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-import model.entities.CarRental;
-import model.entities.Vehicle;
-import model.serices.BrazilTaxService;
-import model.serices.RentalService;
+import entities.Contract;
+import entities.Installment;
+import services.ContractService;
+import services.PaypalService;
 
 public class Program {
 
 	public static void main(String[] args) throws ParseException {
 		
+		//OnlinePaymentService ps = new PaypalService(); //upcasting
+		
+		//System.out.println(ps.paymentFee(200.00));
+		//System.out.println(ps.interest(200.00, 3));
+		
+		//OnlinePaymentService ps = new PaypalService();
+		//ContractService cs = new ContractService(ps);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:ss");
 		
-		System.out.println("Enter rental data");
-		System.out.print("Car model: ");
-		String carModel = sc.nextLine();
-		System.out.print("Pickup (dd/MM/yyyy HH:ss): ");
-		Date start = sdf.parse(sc.nextLine());
-		System.out.print("Return (dd/MM/yyyy HH:ss): ");
-		Date finish = sdf.parse(sc.nextLine());
+		System.out.println("Enter contract data");
+		System.out.print("Number: ");
+		Integer number = sc.nextInt();
+		System.out.print("Date (dd/MM/yyyy): ");
+		Date date = sdf.parse(sc.next());
 		
-		//criar um objeto novo
-		CarRental cr = new CarRental(start, finish, new Vehicle(carModel));
+		System.out.print("Contract value: ");
+		Double totalValue = sc.nextDouble();
 		
-		System.out.print("Enter price per hour: ");
-		double pricePerHour = sc.nextDouble();
-		System.out.print("Enter price per day: ");
-		double pricePerDay = sc.nextDouble();
+		Contract contract = new Contract(number, date, totalValue);
 		
-		RentalService rentalService = new RentalService(pricePerDay, pricePerHour, new BrazilTaxService());
+		System.out.print("Enter number of installments: ");
+		int N = sc.nextInt();
 		
-		rentalService.processInvoice(cr);
+		ContractService cs = new ContractService(new PaypalService());
 		
-		System.out.println("Invoice: ");
-		System.out.println("Basic payment: " + String.format("%.2f", cr.getInvoice().getBasicPayment()));
-		System.out.println("Tax: " + String.format("%.2f", cr.getInvoice().getTax()));
-		System.out.println("Total payment: " + String.format("%.2f", cr.getInvoice().getTotalPayment()));
+		cs.processContract(contract, N);
+		
+		System.out.println("Installments:");
+		for(Installment it : contract.getInstallments()) {
+			System.out.println(it);
+		}
 	
+		sc.close();
+		
+		
 	}
+
 }
