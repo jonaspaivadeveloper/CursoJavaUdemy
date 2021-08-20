@@ -1,22 +1,29 @@
 package application;
 
-import model.entities.AbstractShape;
-import model.entities.Circle;
-import model.entities.Rectangle;
-import model.enums.Color;
+import devices.ComboDevice;
+import devices.ConcretePrinter;
+import devices.ConcreteScanner;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		AbstractShape s1 = new Circle(Color.BLACK, 2.0);	
-		AbstractShape s2 = new Rectangle(Color.WHITE, 3.0, 4.0);
+		ConcretePrinter p = new ConcretePrinter("1000");
+		p.processDoc("My Letter!");
+		p.print("My Letter");
 		
-		System.out.println("Circle color: " + s1.getColor());
-		System.out.println("Circle area: " + String.format("%.3f", s1.area()));
+		System.out.println();
 		
-		System.out.println("Rectangle color: " + s2.getColor());
-		System.out.println("Rectangle area: " + String.format("%.3f", s2.area()));
+		ConcreteScanner s = new ConcreteScanner("2003");
+		s.processDoc("My email");
+		System.out.println("Scan result: " + s.scan());
+		
+		System.out.println();
+		
+		ComboDevice c = new ComboDevice("2001");
+		c.processDoc("My dissertation");
+		c.print("My dissertation!");
+		System.out.println("Scan result: " + c.scan());
 
 	}
 
