@@ -1,22 +1,29 @@
 package application;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+
+import entites.Circle;
+import entites.Rectangle;
+import entites.Shape;
 
 public class Program {
 
 	public static void main(String[] args) {
-		List<Integer> myInts = Arrays.asList(5, 2, 6);
-		printList(myInts);
 		
-		List<String> myStrs = Arrays.asList("Jonas", "Helena", "Clara");
-		printList(myStrs);
+		List<Shape> myShapes = new ArrayList<>();
+		myShapes.add( new Rectangle(3.0, 2.0) );
+		myShapes.add( new Circle(2.0) );
+		
+		System.out.println("Total area: " + totalArea(myShapes));	
 	}
 	
-	public static void printList(List<?> list) {
-		for(Object obj : list) {
-			System.out.println(obj);
+	public static double totalArea(List<Shape> list) {
+		double sum = 0.0;
+		for (Shape s : list) {
+			sum =+ s.area();
 		}
+		return sum;
 	}
 
 }
