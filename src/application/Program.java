@@ -1,7 +1,9 @@
 package application;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import entities.Product;
 
@@ -9,18 +11,24 @@ public class Program {
 
 	public static void main(String[] args) {
 		
-		Map<Product, Double> stock = new HashMap<>();
+		List<Product> list = new ArrayList<>();
 		
-		Product p1 = new Product("Tv", 900.0);
-		Product p2 = new Product("Notebook", 1900.0);
-		Product p3 = new Product("Tablet", 91100.0);
+		list.add(new Product ("TV", 900.00));
+		list.add(new Product ("Notebook", 1200.00));
+		list.add(new Product ("Tablet", 450.00));	
 		
-		stock.put(p1, 1000.0);
-		stock.put(p2, 132000.0);
-		stock.put(p3, 13000.0);
+//		Collections.sort(list);
 		
-		Product ps = new Product("Tv", 900.0);
 		
-		System.out.println("Constains 'ps' key: " + stock.containsKey(ps));
+//		Comparator<Product> comp = ( p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase());
+//		list.sort(comp);
+		
+		list.sort(( p1, p2) -> p1.getName().toUpperCase().compareTo(p2.getName().toUpperCase()));
+		
+		for (Product p : list) {
+			System.out.println(p);
+		}
+		
 	}
+
 }
