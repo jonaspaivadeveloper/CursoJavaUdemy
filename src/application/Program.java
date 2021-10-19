@@ -24,8 +24,10 @@ public class Program {
 //		list.removeIf(new ProductPredicate());
 //		list.removeIf(Product :: staticProductPredicate);
 		
-		Predicate<Product> pred = p -> p.getPrice() >= 100.0;
-		list.removeIf(pred);
+//		Predicate<Product> pred = p -> p.getPrice() >= 100.0;
+//		list.removeIf(pred);
+		
+		list.removeIf(p -> p.getPrice() >= 100.0);
 		
 		for(Product p : list) {
 			System.out.println(p);
