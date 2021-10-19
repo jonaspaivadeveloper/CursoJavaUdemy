@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.Product;
+import util.ProductPredicate;
 
 public class Program {
 
@@ -17,8 +18,10 @@ public class Program {
 		list.add(new Product("Tablet", 100.00));
 		list.add(new Product("Hd CASE", 99.00));
 		
-		//O valor de p será criada no for
-		list.removeIf(p -> p.getPrice() >= 100);
+//		O valor de p será criada no for
+//		list.removeIf(p -> p.getPrice() >= 100);
+		
+		list.removeIf(new ProductPredicate());
 		
 		for(Product p : list) {
 			System.out.println(p);
