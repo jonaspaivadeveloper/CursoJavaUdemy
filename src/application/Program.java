@@ -6,21 +6,22 @@ import java.util.List;
 import entities.Product;
 
 public class Program {
-	
-	public static int compareProducts(Product p1, Product p2) {
-		return p1.getPrice().compareTo(p2.getPrice());
-	}
 
 	public static void main(String[] args) {
 		
 		List<Product> list = new  ArrayList<>();
 		
 		list.add(new Product("TV", 900.00));
+		list.add(new Product("Mouse", 50.00));
 		list.add(new Product("Notebook", 1200.00));
 		list.add(new Product("Tablet", 100.00));
+		list.add(new Product("Hd CASE", 99.00));
 		
-		list.sort(Program :: compareProducts);
+		//O valor de p será criada no for
+		list.removeIf(p -> p.getPrice() >= 100);
 		
-		list.forEach(System.out ::println);
+		for(Product p : list) {
+			System.out.println(p);
+		}
 	}
 }

@@ -32,11 +32,7 @@ public class Product  {
 
 	@Override
 	public String toString() {
-		return "Product [name = " + name + ", price = " + price + "]";
+		return "Product's name = " + name + ", Product`s price = " + price ;
 	}
-	
-//	@Override
-//	public int compareTo(Product p) {
-//		return name.toUpperCase().compareTo(p.getName().toUpperCase());
-//	}
+
 }
