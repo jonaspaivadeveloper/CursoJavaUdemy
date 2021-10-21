@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import entities.Product;
+import util.PriceUpdate;
 
 public class Program {
 
@@ -18,19 +19,9 @@ public class Program {
 		list.add(new Product("Tablet", 100.00));
 		list.add(new Product("Hd CASE", 99.00));
 		
-//		O valor de p será criada no for
-//		list.removeIf(p -> p.getPrice() >= 100);
+		list.forEach(new PriceUpdate());
 		
-//		list.removeIf(new ProductPredicate());
-//		list.removeIf(Product :: staticProductPredicate);
+		list.forEach(System.out :: println);
 		
-//		Predicate<Product> pred = p -> p.getPrice() >= 100.0;
-//		list.removeIf(pred);
-		
-		list.removeIf(p -> p.getPrice() >= 100.0);
-		
-		for(Product p : list) {
-			System.out.println(p);
-		}
 	}
 }
