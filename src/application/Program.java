@@ -19,7 +19,7 @@ public class Program {
 		list.add(new Product("Tablet", 100.00));
 		list.add(new Product("Hd CASE", 99.00));
 		
-		list.forEach(Product :: staticPriceUpdate);
+		list.forEach(Product :: nonStaticPriceUpdate);
 		
 		list.forEach(System.out :: println);
 		
