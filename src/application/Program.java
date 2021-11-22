@@ -2,10 +2,9 @@ package application;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import entities.Product;
-import util.UpperCaseName;
+import model.services.ProductService;
 
 public class Program {
 
@@ -19,8 +18,11 @@ public class Program {
 		list.add(new Product("Tablet", 100.00));
 		list.add(new Product("Hd CASE", 99.00));
 		
-		List<String> names = list.stream().map(new UpperCaseName()).collect(Collectors.toList());
+		ProductService ps = new ProductService();
 		
-		names.forEach(System.out::println);
+		double sum = ps.filteredSum(list, p -> p.getName().charAt(0) == 'T');
+		sum = ps.filteredSum(list, p -> p.getPrice() < 100);
+		
+		System.out.println("Sum = " + String.format("%.2f", sum));
 	}
 }
